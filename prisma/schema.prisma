@@ -1,5 +1,5 @@
 datasource db {
-  provider     = "mysql"
+  provider     = "mongodb"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -9,11 +9,11 @@ generator client {
 }
 
 model DiscordProfile {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @unique
   name String
-  imageUrl String @db.Text
-  email String @db.Text
+  imageUrl String
+  email String
 
   servers DiscordServer[]
   members DiscordMember[]
@@ -24,12 +24,12 @@ model DiscordProfile {
 }
 
 model DiscordServer {
-  id String @id @default(uuid())
+   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   imageUrl String
-  inviteCode String @db.Text
+  inviteCode String
   
-  profileId String
+  profileId String @db.ObjectId
   profile DiscordProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   members DiscordMember[]
@@ -48,13 +48,13 @@ enum DiscordMemberRole {
 }
 
 model DiscordMember {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   role DiscordMemberRole @default(GUEST)
 
-  profileId String
+  profileId String @db.ObjectId
   profile DiscordProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-  serverId String
+  serverId String @db.ObjectId
   server DiscordServer @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -71,14 +71,14 @@ enum DiscordChannelType {
 }
 
 model DiscordChannel {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   type DiscordChannelType @default(TEXT)
 
-  profileId String
+  profileId String @db.ObjectId
   profile DiscordProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-  serverId String
+  serverId String @db.ObjectId
   server DiscordServer @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
