@@ -27,7 +27,7 @@ model DiscordServer {
    id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   imageUrl String
-  inviteCode String
+  inviteCode String @unique
   
   profileId String @db.ObjectId
   profile DiscordProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
