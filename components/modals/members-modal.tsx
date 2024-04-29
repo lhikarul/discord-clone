@@ -57,7 +57,7 @@ export const MembersModal = () => {
 
   const { server } = data as { server: ServerWithMembersWithProfile };
 
-  const onRoleChange = async (memberId: string, role: DiscordMemberRole) => {
+  const onKick = async (memberId: string) => {
     try {
       setLoadingId(memberId);
       const url = qs.stringifyUrl({
@@ -67,6 +67,26 @@ export const MembersModal = () => {
         },
       });
 
+      const response = await axios.delete(url);
+
+      router.refresh();
+
+      onOpen("members", { server: response.data });
+    } catch (error) {
+      console.log("onKick error", error);
+    }
+  };
+
+  const onRoleChange = async (memberId: string, role: DiscordMemberRole) => {
+    try {
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        },
+      });
+      console.log("url2 ", url);
       const response = await axios.patch(url, { role });
 
       router.refresh();
@@ -142,7 +162,7 @@ export const MembersModal = () => {
                             </DropdownMenuPortal>
                           </DropdownMenuSub>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => onKick(member.id)}>
                             <Gavel className="w-4 h-4 mr-2" /> Kick
                           </DropdownMenuItem>
                         </DropdownMenuContent>
