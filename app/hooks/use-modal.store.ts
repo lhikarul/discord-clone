@@ -1,4 +1,4 @@
-import { DiscordServer } from "@prisma/client";
+import { DiscordChannelType, DiscordServer } from "@prisma/client";
 import { create } from "zustand";
 
 export type ModalType =
@@ -12,6 +12,7 @@ export type ModalType =
 
 interface ModalData {
   server?: DiscordServer;
+  channelType?: DiscordChannelType;
 }
 
 interface ModalStore {
