@@ -34,7 +34,7 @@ export const DeleteServerModal = () => {
       router.push("/");
       onClose();
     } catch (error) {
-      console.log(`/api/servers/${server?.id}/leave ERROR `, error);
+      console.log(`/api/servers/${server?.id} ERROR `, error);
     }
   };
 
