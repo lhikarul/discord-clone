@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-29T05:23:45.802Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="3l2YJzhT9WhHNuUPZMhU" version="24.3.1" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-05-01T05:25:24.274Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="gKWzLJGCWnO_ZCK7XwAu" version="24.3.1" type="github" pages="5">
   <diagram id="BDFFObF1lVG78feEs3MV" name="create server">
     <mxGraphModel dx="1434" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
       <root>
@@ -234,6 +234,35 @@
             <mxPoint x="550" y="290" as="sourcePoint" />
             <mxPoint x="600" y="240" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="VKMNxzsC63fTHj46n2YD" name="第 5 页">
+    <mxGraphModel dx="1434" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4MQBT_Cr6znVQCmeEGp3-1" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="280" width="560" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="4MQBT_Cr6znVQCmeEGp3-2" value="channel name" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4MQBT_Cr6znVQCmeEGp3-3" value="channel type" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4MQBT_Cr6znVQCmeEGp3-4" value="create" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4MQBT_Cr6znVQCmeEGp3-5" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="980" y="500" as="sourcePoint" />
+            <mxPoint x="1120" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4MQBT_Cr6znVQCmeEGp3-6" value="/api/channels" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="400" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
