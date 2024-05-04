@@ -57,6 +57,12 @@ model DiscordMember {
   serverId String @db.ObjectId
   server DiscordServer @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
+  messages DiscordMessage[]
+  directMessage DiscordDirectMessage[]
+
+  conversationsInitiated DiscordConversation[] @relation("MemberOne")
+  conversationsReceived DiscordConversation[] @relation("MemberTwo")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -81,9 +87,68 @@ model DiscordChannel {
   serverId String @db.ObjectId
   server DiscordServer @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
+  messages DiscordMessage[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([profileId])
   @@index([serverId])
+}
+
+model DiscordMessage {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  content String
+
+  fileUrl String?
+
+  memberId String @db.ObjectId
+  member DiscordMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  channelId String @db.ObjectId
+  channel DiscordChannel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  deleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([channelId])
+  @@index([memberId])
+}
+
+model DiscordConversation {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  memberOneId String @db.ObjectId
+  memberOne DiscordMember @relation("MemberOne", fields: [memberOneId], references: [id], onDelete: Cascade)
+
+  memberTwoId String @db.ObjectId
+  memberTwo DiscordMember @relation("MemberTwo", fields: [memberTwoId], references: [id], onDelete: Cascade)
+
+  directMessages DiscordDirectMessage[]
+
+  @@index([memberTwoId])
+
+  @@unique([memberOneId, memberTwoId])
+}
+
+model DiscordDirectMessage {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  content String @db.String
+  fileUrl String? @db.String
+
+  memberId String @db.ObjectId
+  member DiscordMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  conversationId String @db.ObjectId
+  conversation DiscordConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  deleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([memberId])
+  @@index([conversationId])
 }
