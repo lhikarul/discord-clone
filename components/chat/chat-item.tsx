@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import queryString from "query-string";
 import axios from "axios";
 import { useModal } from "@/app/hooks/use-modal.store";
+import { useParams, useRouter } from "next/navigation";
 
 interface ChatItemProps {
   id: string;
@@ -57,6 +58,9 @@ const ChatItem = ({
   socketUrl,
   socketQuery,
 }: ChatItemProps) => {
+  const params = useParams();
+  const router = useRouter();
+
   const { onOpen } = useModal();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -94,6 +98,13 @@ const ChatItem = ({
     }
   };
 
+  const onMemberClick = () => {
+    if (member.id === currentMember.id) {
+      return;
+    }
+    router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
+  };
+
   useEffect(() => {
     form.reset({
       content,
@@ -114,13 +125,19 @@ const ChatItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div className="cursor-pointer hover:drop-shadow-md transition">
+        <div
+          onClick={onMemberClick}
+          className="cursor-pointer hover:drop-shadow-md transition"
+        >
           <UserAvatar src={member.profile.imageUrl} />
         </div>
         <div className="flex flex-col w-full">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
-              <p className="font-semibold text-sm hover:underline cursor-pointer">
+              <p
+                onClick={onMemberClick}
+                className="font-semibold text-sm hover:underline cursor-pointer"
+              >
                 {member.profile.name}
               </p>
               <ActionTooltip label={member.role}>
