@@ -22,20 +22,18 @@ export const useChatSocket = ({
 }: ChatSocketProps) => {
   const { socket } = useSocket();
   const queryClient = useQueryClient();
-  console.log("socket ", socket);
+
   useEffect(() => {
     if (!socket) {
       return;
     }
 
     socket.on(updateKey, (message: MessageWithMemberWithProfile) => {
-      console.log("updated websocket ");
       queryClient.setQueryData([queryKey], (oldData: any) => {
-        console.log("updated websocket2");
-        if (!oldData || !oldData.page || oldData.pages.length === 0) {
+        if (!oldData || !oldData.pages || oldData.pages.length === 0) {
           return oldData;
         }
-        console.log("updated websocket3");
+
         const newData = oldData.pages.map((page: any) => {
           return {
             ...page,
@@ -46,11 +44,6 @@ export const useChatSocket = ({
               return item;
             }),
           };
-        });
-
-        console.log("update key ", {
-          ...oldData,
-          pages: newData,
         });
 
         return {
@@ -77,10 +70,7 @@ export const useChatSocket = ({
           ...newData[0],
           items: [message, ...newData[0].items],
         };
-        console.log("add key ", {
-          ...oldData,
-          pages: newData,
-        });
+
         return {
           ...oldData,
           pages: newData,
@@ -92,5 +82,5 @@ export const useChatSocket = ({
       socket.off(addKey);
       socket.off(updateKey);
     };
-  });
+  }, [queryClient, socket, addKey, updateKey, queryKey]);
 };

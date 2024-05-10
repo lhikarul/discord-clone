@@ -27,12 +27,14 @@ export const useChatQuery = ({
       },
       { skipNull: true }
     );
+
     const res = await fetch(url);
 
     return res.json();
   };
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
+    //@ts-ignore
     useInfiniteQuery({
       initialPageParam: undefined,
       queryKey: [queryKey],
