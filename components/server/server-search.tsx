@@ -50,7 +50,6 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
     id: string;
     type: "channel" | "member";
   }) => {
-    console.log("type ", type);
     setOpen(false);
     if (type === "member")
       router.push(`/servers/${params?.serverId}/conversations/${id}`);

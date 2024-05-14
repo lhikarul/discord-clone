@@ -72,11 +72,11 @@ export const EditServerModal = () => {
   };
 
   useEffect(() => {
-    if (server) {
+    if (server && isModalOpen) {
       form.setValue("name", server.name);
       form.setValue("imageUrl", server.imageUrl);
     }
-  }, [server, form]);
+  }, [server, form, isModalOpen]);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
