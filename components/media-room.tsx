@@ -23,7 +23,6 @@ const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
 
     (async () => {
       try {
-        console.log("wtf");
         const resp = await fetch(
           `/api/livekit?room=${chatId}&username=${name}`
         );

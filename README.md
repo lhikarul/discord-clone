@@ -88,6 +88,8 @@
 
         5.2.1 (ChatMessages)
 
+                5.2.1.1 (useChatQuery) -> (/api/messages)
+
         5.2.2 (ChatInput)
 
 6.  InviteCodePage -> 通過邀請連結加入頻道

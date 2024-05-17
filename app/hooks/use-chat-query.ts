@@ -29,7 +29,6 @@ export const useChatQuery = ({
     );
 
     const res = await fetch(url);
-
     return res.json();
   };
 
@@ -39,7 +38,9 @@ export const useChatQuery = ({
       initialPageParam: undefined,
       queryKey: [queryKey],
       queryFn: fetchMessages,
-      getNextPageParam: (lastPage) => lastPage?.nextCursor,
+      getNextPageParam: (lastPage) => {
+        return lastPage?.nextCursor;
+      },
       refetchInterval: isConnected ? false : 1000,
     });
 
