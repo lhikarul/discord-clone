@@ -88,11 +88,19 @@
 
         5.2.1 (ChatMessages)
 
-                5.2.1.1 (useChatQuery) -> (/api/messages)
+                5.2.1.1 (useChatQuery) -> (/api/messages) -> (useInfinityQuery + useChatScroll) 無限加載訊息 -> useChatSocket 實時更新訊息
 
-        5.2.2 (ChatInput)
+                5.2.1.2 (ChatItem)
 
-6.  InviteCodePage -> 通過邀請連結加入頻道
+                        5.2.1.2.1 (/api/socket/messages/${id})
+
+        5.2.2 (ChatInput) -> (/api/socket/messages)
+
+    5.3 頻道類型為 AUDIO、VIDEO -> (/api/livekit?room={chatId}&username={name}) (livekit library)
+
+6.  ConversationIdPage 同 (5)
+
+7.  InviteCodePage -> 通過邀請連結加入頻道
 
     10.1 用戶已加入 -> (/servers/${existingServer.id})
 
